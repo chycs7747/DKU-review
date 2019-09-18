@@ -10,6 +10,7 @@ int main(void){
     printf("%d %d\n",a, b);
     printf("%p %p\n",&a,&b);
     printf("%u %u\n",(unsigned char)a, b);
+    printf("%d\n",sizeof('a'));
   
     return 0; 
 }
