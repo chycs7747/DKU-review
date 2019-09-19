@@ -41,10 +41,10 @@ else
 ```c
 if(exp){
     statement1;
-} 
+}
 else if(exp) {
     statement2;
-} 
+}
 else if(exp) {
     statement3;
 }
@@ -68,12 +68,3 @@ while (i<=10){
   i++;
 }
 ```
-
-
-
-
-
-
-
-
-
