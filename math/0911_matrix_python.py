@@ -12,7 +12,7 @@ class matrix:
                 self.matrix = []
                 self.row_num = 0
                 self.column_num = 0
-                print("ERROR")
+                print("Error")
                 return
 
     def __add__(self,other):
@@ -25,7 +25,7 @@ class matrix:
                 result.append(tmp)
             return matrix(*result)
         else:
-            return 'ERROR'
+            return 'Error'
 
     def __sub__(self,other):
         if (self.row_num==other.row_num) and (self.column_num==other.column_num):
@@ -37,25 +37,66 @@ class matrix:
                 result.append(tmp)
             return matrix(*result)
         else:
-            return 'ERROR'
+            return 'Error'
 
     def __mul__(self,other):
-        if (self.column_num==other.row_num):
+        if type(other)==matrix:
+            if (self.column_num==other.row_num):
+                result = []
+                for i in range(self.row_num):
+                    tmp = []
+                    for j in range(other.column_num):
+                        num = 0
+                        for v in range(self.column_num):
+                            num += self.matrix[i][v] * other.matrix[v][j]
+                        tmp.append(num)
+                    result.append(tmp)
+                return matrix(*result)
+            else:
+                return 'Error'
+        elif type(other)==int:
             result = []
             for i in range(self.row_num):
                 tmp = []
-                for j in range(other.column_num):
-                    num = 0
-                    for v in range(self.column_num):
-                        num += self.matrix[i][v] * other.matrix[v][j]
-                    tmp.append(num)
+                for j in range(self.column_num):
+                    tmp.append(self.matrix[i][j]*other)
                 result.append(tmp)
             return matrix(*result)
-        else:
-            return 'ERROR'
 
-
-
+    def __xor__(self,other=matrix([1,0],[0,1])):
+        if other in [1,-1]:
+            for i in range(self.row_num):
+                tmp = []
+                for j in range(self.column_num):
+                    tmp.append(self.matrix[j][i])
+                result.append(tmp)
+            return matrix(*result)
+    
+    def transported(self):
+        result = []
+        for i in range(self.row_num):
+            tmp = []
+            for j in range(self.column_num):
+                tmp.append(self.matrix[j][i])
+            result.append(tmp)
+        return matrix(*result)
+        
+    def __invert__(self):
+        return self.transported()
+    
+    def __pow__(self,other):
+        if type(other)==int:
+            tmp = matrix(*self.matrix)
+            for _ in range(other-1):
+                tmp = tmp*tmp
+            return tmp
+        elif type(other)==str:
+            if other in ['t','T']:
+                return self.transported()
+    
+    def __rmul__(self,other):
+        return self.__mul__(other)
+    
     def __truediv__(self,other):
         pass
     def __getitem__(self,index):

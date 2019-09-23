@@ -85,7 +85,7 @@ int main(void){
 3. RAM
 4. CPU
 
-**Why use RAM —>> HDD is slow , RAM is fast
+**Why computer use RAM** —>> HDD is slow , RAM is fast
 
 ---
 
